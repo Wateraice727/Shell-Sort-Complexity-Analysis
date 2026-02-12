@@ -1,0 +1,14 @@
+C:\Users\Rikku_A (huh)\Documents\cs\sort\bin\Debug\net10.0\sort.exe
+C:\Users\Rikku_A (huh)\Documents\cs\sort\bin\Debug\net10.0\sort.deps.json
+C:\Users\Rikku_A (huh)\Documents\cs\sort\bin\Debug\net10.0\sort.runtimeconfig.json
+C:\Users\Rikku_A (huh)\Documents\cs\sort\bin\Debug\net10.0\sort.dll
+C:\Users\Rikku_A (huh)\Documents\cs\sort\bin\Debug\net10.0\sort.pdb
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.AssemblyInfoInputs.cache
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.AssemblyInfo.cs
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.csproj.CoreCompileInputs.cache
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.dll
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\refint\sort.dll
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.pdb
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\sort.genruntimeconfig.cache
+C:\Users\Rikku_A (huh)\Documents\cs\sort\obj\Debug\net10.0\ref\sort.dll
