@@ -1,5 +1,5 @@
 # Shell-Sort-Complexity-Analysis
-An in-depth analysis of Shell Sort's Time Complexity depends on Gap Sequences and some proofs of Mathematic. Part of DSA Coursework in CS0001 class, BIT - UEH.
+An in-depth report of Shell Sort's Time Complexity depends on Gap Sequences and some proofs of Mathematic. Part of DSA Coursework in CS0001 class, BIT - UEH.
 
 **Author**
 - Lê Văn Minh (minhleevanw@gmail.com | Email UEH: minhle.31251028146@st.ueh.edu.vn)
