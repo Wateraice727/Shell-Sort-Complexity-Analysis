@@ -1,32 +1,28 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Intrinsics.X86;
 
-namespace DSA
+namespace backup
 {
     public class Timing
     {
-        private TimeSpan _startingTime;
-        private TimeSpan _duration;
+        private Stopwatch _stopwatch;
         public Timing()
         {
-            _startingTime = new TimeSpan(0);
-            _duration = new TimeSpan(0);
+            _stopwatch = new Stopwatch();
         }
         public void StartTime()
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            _startingTime=Process.GetCurrentProcess().Threads[0].UserProcessorTime;
+            _stopwatch.Restart();
         }
         public void StopTime()
         {
-            _duration=Process.GetCurrentProcess().Threads[0].UserProcessorTime.Subtract(_startingTime);
+            _stopwatch.Stop();
         }
         public TimeSpan Result()
         {
-            return _duration;
+            return _stopwatch.Elapsed;
         }
     }
     internal class Program
@@ -268,6 +264,10 @@ namespace DSA
         static void Main(string[] args)
         {
             Console.Clear();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
 
             //StandardOutput();
             //GapCheck();

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\sort.csproj",
+      "projectUniqueName": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\Source Code\\sort.csproj",
       "projectName": "sort",
-      "projectPath": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\sort.csproj",
+      "projectPath": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\Source Code\\sort.csproj",
       "packagesPath": "C:\\Users\\Rikku_A (huh)\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\obj\\",
+      "outputPath": "C:\\Users\\Rikku_A (huh)\\Documents\\cs\\sort\\Source Code\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rikku_A (huh)\\AppData\\Roaming\\NuGet\\NuGet.Config",
