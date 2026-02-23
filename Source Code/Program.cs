@@ -248,7 +248,7 @@ namespace DSA
         {
             Timing maintimer = new Timing(), copytimer = new Timing();
             int time = 1;
-            int size = 10000000;
+            int size = 10000000 ;
             List<int> gaps = Sedgewick(size);
 
             copytimer.StartTime();
