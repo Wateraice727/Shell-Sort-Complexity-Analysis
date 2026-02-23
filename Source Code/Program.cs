@@ -145,20 +145,21 @@ namespace DSA
             return arr;
         }
         // static long count = 0;
-        static void ShellSort (int [] arr, int left, int right, List<int> gaps) 
-        {    
+        static void ShellSort<T> (T [] arr, int left, int right, List<int> gaps) 
+        where T : IComparable<T>
+        {
             // nếu left > right thì sắp xếp giảm dần
             bool greater = left > right;
             if (greater) Swap(ref left, ref right);
-            foreach (int h in gaps) //Duyệt gap ngược
+            foreach (int h in gaps) //Duyệt gap
             {
                 if (h >= right - left + 1) continue;
                 for (int i = left + h; i <= right; i++) 
                 {
                     // count++;
-                    int key = arr[i];
+                    T key = arr[i];
                     int j = i;
-                    while (j >= left + h && (greater ? arr[j - h] < key : arr[j - h] > key))
+                    while (j >= left + h && (greater ? arr[j - h].CompareTo(key) > 0 : arr[j - h].CompareTo(key) < 0))
                     {
                         arr[j] = arr[j - h];    
                         j -= h;

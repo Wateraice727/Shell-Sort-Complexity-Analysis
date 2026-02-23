@@ -241,27 +241,44 @@ namespace backup
         }
         static void Process()
         {
-            Timing maintimer = new Timing(), copytimer = new Timing();
-            int time = 1;
-            int size = 10000000;
-            List<int> gaps = Sedgewick(size);
+            using (StreamWriter fout = new StreamWriter("Ciura.csv"))
+            {    
+                fout.Write("Size, Average Time (ms)\n");
+                int time = 1000;
 
-            copytimer.StartTime();
-            int[] arr = GenerateValue(size);
-            copytimer.StopTime();
+                for (int size = 1 << 4; size <= 1 << 19; size <<= 1)
+                {
+                    Timing maintimer = new Timing();    
+                    List<int> gaps = CiuraEx(size);
+                    int[] arr;
+                    double total = 0;
+                    
+                    for (int i = 0; i < time; i++)
+                    {
+                        arr = GenerateValue(size);
 
-            maintimer.StartTime();
-            for (int i = 0; i < time; i++)
-            {
-                arr = GenerateValue(size);
-                ShellSort(arr, 0, size - 1, gaps);
+                        maintimer.StartTime();
+                        ShellSort(arr, 0, size - 1, gaps);
+                        maintimer.StopTime();
+                        total += maintimer.Result().TotalMilliseconds;
+                    }
+
+                    total /= time;
+                    fout.Write("{0}, {1}\n", size, total);
+                    Console.Write("Size = {0}, Time = {1} ms\n", size, total);
+                }
             }
-            maintimer.StopTime();
-
-            // Console.Write(count/time + "\n");
-            Console.Write("Average Estimated Time: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
         }
-        static void Main(string[] args)
+        static void Demo()
+        {
+            int cnt = 1 << 30;
+            Timing timer = new Timing();
+            timer.StartTime();
+            while (cnt-- > 0);
+            timer.StopTime();
+            Console.Write(cnt + " " + timer.Result().TotalMilliseconds);
+        }
+        static void Main1(string[] args)
         {
             Console.Clear();
 
@@ -272,7 +289,8 @@ namespace backup
             //StandardOutput();
             //GapCheck();
             //StableCheck();
-            Process();
+            // Process();
+            Demo();
         }
     }
 }
