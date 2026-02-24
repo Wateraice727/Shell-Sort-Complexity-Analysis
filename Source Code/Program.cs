@@ -7,26 +7,22 @@ namespace DSA
 {
     public class Timing
     {
-        private TimeSpan _startingTime;
-        private TimeSpan _duration;
+        private Stopwatch _stopwatch;
         public Timing()
         {
-            _startingTime = new TimeSpan(0);
-            _duration = new TimeSpan(0);
+            _stopwatch = new Stopwatch();
         }
         public void StartTime()
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            _startingTime=Process.GetCurrentProcess().Threads[0].UserProcessorTime;
+            _stopwatch.Restart();
         }
         public void StopTime()
         {
-            _duration=Process.GetCurrentProcess().Threads[0].UserProcessorTime.Subtract(_startingTime);
+            _stopwatch.Stop();
         }
         public TimeSpan Result()
         {
-            return _duration;
+            return _stopwatch.Elapsed;
         }
     }
     internal class Program
@@ -248,7 +244,7 @@ namespace DSA
         {
             Timing maintimer = new Timing(), copytimer = new Timing();
             int time = 1;
-            int size = 10000000 ;
+            int size = 10000000;
             List<int> gaps = Sedgewick(size);
 
             copytimer.StartTime();
@@ -270,10 +266,10 @@ namespace DSA
         {
             Console.Clear();
 
-            //StandardOutput();
+            // StandardOutput();
             //GapCheck();
-            //StableCheck();
-            Process();
+            // StableCheck();
+            // Process();
         }
     }
 }
