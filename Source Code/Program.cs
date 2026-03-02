@@ -141,27 +141,41 @@ namespace DSA
             return arr;
         }
         // static long count = 0;
-        static void ShellSort<T> (T [] arr, int left, int right, List<int> gaps) 
-        where T : IComparable<T>
+        static void ShellSort (int[] arr, int left, int right, List<int> gaps) 
         {
-            // nếu left > right thì sắp xếp giảm dần
-            bool greater = left > right;
-            if (greater) Swap(ref left, ref right);
-            foreach (int h in gaps) //Duyệt gap
+            foreach (int h in gaps) //Duyệt gap ngược
             {
                 if (h >= right - left + 1) continue;
                 for (int i = left + h; i <= right; i++) 
                 {
                     // count++;
-                    T key = arr[i];
+                    int key = arr[i];
                     int j = i;
-                    while (j >= left + h && (greater ? arr[j - h].CompareTo(key) > 0 : arr[j - h].CompareTo(key) < 0))
+                    while (j >= left + h && (arr[j - h] > key))
                     {
                         arr[j] = arr[j - h];    
                         j -= h;
                         // count++;
                     }
                     arr[j] = key;
+                }
+            }
+        }
+        static void BadShellSort(int[] arr, int n)
+        {
+            int pos = n / 2 - 1;
+            while (pos > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    int j = i, tmp = arr[i];
+                    for (; j >= pos && arr[j - pos] > tmp; j -= pos) arr[j] = arr[j - pos];
+                    arr[j] = tmp;
+                }
+                if (pos >> 1 != 0) pos >>= 1;
+                else
+                {
+                    pos = pos == 1 ? 0 : 1;
                 }
             }
         }
@@ -240,11 +254,11 @@ namespace DSA
             //    Console.Write(h + " ");
             //Console.Write('\n');
         }
+        static Timing maintimer = new Timing(), copytimer = new Timing();
         static void Process()
         {
-            Timing maintimer = new Timing(), copytimer = new Timing();
             int time = 1;
-            int size = 10000000;
+            int size = 1000000;
             List<int> gaps = Sedgewick(size);
 
             copytimer.StartTime();
@@ -262,14 +276,71 @@ namespace DSA
             // Console.Write(count/time + "\n");
             Console.Write("Average Estimated Time: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
         }
+        static int time = 1, size = 1 << 20;
+        static List<int> gaps = Shell(size);
+        static void Sorted()
+        {
+            copytimer.StartTime();
+            int[] arr = BestGenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = BestGenerateValue(size);
+                BadShellSort(arr, size);
+            }
+            maintimer.StopTime();
+            
+            Console.Write("Sorted: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void Randomized()
+        {
+            copytimer.StartTime();
+            int[] arr = GenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = GenerateValue(size);
+                BadShellSort(arr, size);
+            }
+            maintimer.StopTime();
+
+            Console.Write("Randomized: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void RevSorted()
+        {
+            copytimer.StartTime();
+            int[] arr = ReverseGenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = ReverseGenerateValue(size);
+                BadShellSort(arr, size);
+            }
+            maintimer.StopTime();
+
+            Console.Write("Reversed Sort: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void MainProcess()
+        {
+            Sorted();
+            Randomized();
+            RevSorted();
+        }
         static void Main(string[] args)
         {
             Console.Clear();
 
             // StandardOutput();
-            //GapCheck();
+            // GapCheck();
             // StableCheck();
             // Process();
+            MainProcess();
         }
     }
 }
