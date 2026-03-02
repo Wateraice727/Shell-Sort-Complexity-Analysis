@@ -416,3 +416,24 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/
+
+# DLLs and Executables
+*.exe
+*.dll
+*.pdb
+*.apphost.exe
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# OS files
+.DS_Store
+Thumbs.db
