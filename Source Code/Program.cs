@@ -276,7 +276,7 @@ namespace DSA
             // Console.Write(count/time + "\n");
             Console.Write("Average Estimated Time: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
         }
-        static int time = 1, size = 1 << 20;
+        static int time = 100, size = 1 << 20;
         static List<int> gaps = Shell(size);
         static void Sorted()
         {
@@ -288,7 +288,7 @@ namespace DSA
             for (int i = 0; i < time; i++)
             {
                 arr = BestGenerateValue(size);
-                BadShellSort(arr, size);
+                ShellSort(arr, 0, size - 1, Sedgewick(size));
             }
             maintimer.StopTime();
             
@@ -304,7 +304,7 @@ namespace DSA
             for (int i = 0; i < time; i++)
             {
                 arr = GenerateValue(size);
-                BadShellSort(arr, size);
+                ShellSort(arr, 0, size - 1, Sedgewick(size));
             }
             maintimer.StopTime();
 
@@ -320,17 +320,68 @@ namespace DSA
             for (int i = 0; i < time; i++)
             {
                 arr = ReverseGenerateValue(size);
-                BadShellSort(arr, size);
+                ShellSort(arr, 0, size - 1, Sedgewick(size));
             }
             maintimer.StopTime();
 
             Console.Write("Reversed Sort: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void Best()
+        {
+            copytimer.StartTime();
+            int[] arr = BestGenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = BestGenerateValue(size);
+                ShellSort(arr, 0, size - 1, Sedgewick(size));
+            }
+            maintimer.StopTime();
+            
+            Console.Write("Best: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void Worst()
+        {
+            copytimer.StartTime();
+            int[] arr = GenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = GenerateValue(size);
+                ShellSort(arr, 0, size - 1, Shell(size));
+            }
+            maintimer.StopTime();
+            
+            Console.Write("Worst: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
+        }
+        static void Average()
+        {
+            copytimer.StartTime();
+            int[] arr = GenerateValue(size);
+            copytimer.StopTime();
+
+            maintimer.StartTime();
+            for (int i = 0; i < time; i++)
+            {
+                arr = GenerateValue(size);
+                ShellSort(arr, 0, size - 1, Sedgewick(size));
+            }
+            maintimer.StopTime();
+            
+            Console.Write("Average: {0} ms\n", maintimer.Result().TotalMilliseconds/time - copytimer.Result().TotalMilliseconds);
         }
         static void MainProcess()
         {
             Sorted();
             Randomized();
             RevSorted();
+            Best();
+            Worst();
+            Average();
         }
         static void Main(string[] args)
         {
